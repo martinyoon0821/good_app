@@ -1,6 +1,6 @@
 작성자 : <%= @board.user.name %> <br>
 제목 : <%= @board.title %> <br>
-내용 : <%= @board.content %> <br>
+내용 : <%= @board.content.html_safe %> <br>
 
 <hr>
 

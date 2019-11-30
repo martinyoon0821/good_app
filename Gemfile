@@ -64,3 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'faker'
+gem 'tinymce-rails'
+gem 'pagy'
+gem 'activeadmin'
+gem 'rails_db', '2.0.4'
