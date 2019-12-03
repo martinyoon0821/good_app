@@ -189,7 +189,9 @@ a:active, a:hover {text-decoration:none;}
 
 <%== pagy_nav(@pagy) %>
 
-<a class="goto_write" href="/boards/new">글 작성하기</a>
+<div class="goto_write">
+ <a href="/boards/new">글 작성하기</a>
+</div> 
 </div>
   <div class="column side" style="background-color:#ffc790;;">
       <div align="left">                       
@@ -207,18 +209,18 @@ a:active, a:hover {text-decoration:none;}
     <%= link_to "로그인", new_user_session_path %>
 <% end %>
   </div>
-  <a href="/posts/new">새 글 쓰기</a>
+ <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank"> 
+<input type=hidden name=where value="nexteach"> 
+<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35"> 
+<input type=image src="/apple.png"  width='80' height='25' border=0 align=absmiddle> 
+</form> 
   
-                  <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank"> 
-        <input type=hidden name=where value="nexteach"> 
-        <input class="text" name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35"> 
-  <button type="button" class="btn btn-outline-success">검색</button>
-      </form> 
+                 
 </div>
 
 
 <div class="footer">
   <form role="form">
-<input type="text" class="form-control" placeholder="웹사이트 내부에서 검색" name="search" value="" onkeypress="if (event.keyCode == 13) { try{window.location.href='/search/' + document.getElementsByName('search')[0].value.replaceAll('%', '%25');document.getElementsByName('search')[0].value = ''; return false;}catch(e){} }">
+
 </form>
 </div>
