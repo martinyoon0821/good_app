@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   
   get 'boards/map'
   get 'boards/index' => 'boards#index'
+  get 'boards/likes/:board_id' => "likes#create"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

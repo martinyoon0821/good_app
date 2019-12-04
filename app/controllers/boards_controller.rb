@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
     if params[:query].present?
       @boards = Board.where("title || content LIKE ?","%#{params[:query]}%")
     else
-    @boards = Board.all
+    @boards = Board.order("created_at DESC").all
   end
   
   @pagy, @boards = pagy(@boards, items: 7)

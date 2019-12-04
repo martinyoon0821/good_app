@@ -1,6 +1,143 @@
+<style>
+@font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {box-sizing: border-box;}
+body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
+body {
+  font-family: 'SDMiSaeng';
+}
+a {color:#333; text-decoration:none;}
+a:active, a:hover {text-decoration:none;}
+/* Style the header */
+.header {
+  width:100%;
+  height:150px;
+  background:#fd7f4f;
+}
+.header .btn_Area {position:absolute; text-align:center; width:100%; top:100px;}
+.header .button {background:#008000; padding:5px 20px; border-radius: 5px; display:inline-block; font-size:16px;}
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 700px; /* Should be removed. Only for demonstration */
+}
+/* Left and right column */
+.column.side {
+  width: 20%;
+}
+.column.side input.text {width:90%; height:30px;}
+.column.side input.photo {width:90%; height:80px;}
+.column.side a {background:#008000; padding:5px 0px; width:180px; text-align:center; border-radius: 5px; display:inline-block; font-size:16px; margin:10px 0;}
+/* Middle column */
+.column.middle {
+  width: 60%;
+}
+.column.middle input.text {width:70%; height:25px; margin-top:5px;}
+.column.middle button.submit {background:#666; color:#fff; border:none; border-radius:3px; padding:3px 10px;}
+.column.middle table .th1 {width:10%;}
+.column.middle table .th2 {width:30%;}
+.column.middle table .th3 {width:50%;}
+.column.middle table .th4 {width:10%;}
+.column.middle table {margin-top:10px;}
+.column.middle table th {background:#aaa; color:#fff;}
+.column.middle table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.column.middle table td, .column.middle table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.column.middle table tr:nth-child(even){background-color: #F2F2F2;}
+.column.middle table tr:hover {background-color: #ddd;}
+.column.middle table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align:center;
+  background-color: #4CAF50;
+  color: white;
+}
+.pagination {
+  display: inline-block;
+  width:100%;
+  margin-top:15px;
+}
+.pagination span {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.pagination span.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+.goto_write {background:#888; color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-40px;}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Style the footer */
+.footer {
+  background-color: #F1F1F1;
+  padding: 10px;
+  text-align: center;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+</style>
+<!-- header 시작 -->
+<div class="header">
+  <img src="/로고.PNG" width="20%" height="150px" align="left">
+    <img src="/캡처(멋사).PNG" width="60%" height="150px">
+  <!-- <h2>Header</h2> -->
+ <div class="btn_Area">
+     <div class="button">
+       <a href="/boards/map">지도</a>
+     </div>
+     <div class="button">
+      <a href="/boards/index">게시판</a>
+     </div>
+    </div>
+</div>
+<!-- header 끝 -->
+<div class="row">
+  <div class="column side" style="background-color:#ffc790;">
+  </div>
+<div class="column middle" style="background-color:#fff;">
+<!--
+<% if user_signed_in? %>
+    <%= current_user.name %>
+    <a href="/users/sign_out" data-method="delete">로그아웃</a>
+<% else %>
+    <a href="/users/sign_in">로그인</a>
+<% end %>
+<a href="/boards/map">지도</a>
+<a href="/boards/index">게시판</a>
+-->
+<h1>글 수정하기</h1>
 <form action="/boards/update/<%= @board.id %>" method="POST">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    제목 : <input type="text" name="title" value="<%= @board.title %>" /> <br/>
-    내용 : <textarea name="content"><%= @board.content %></textarea> <br/>
-    <button type="submit">수정</button>
+    제목 : <input type="text" name="title"  style="margin: 0px; width: 80%; height: 40px; left: 10%;" value="<%= @board.title %>" /> <br/><br/>
+    내용 : <br/><textarea name="content" class="tinymce" style="margin: 0px; width: 83%; height: 318px;"><%= @board.content %></textarea> <br/>
+   <%= tinymce %>
+    <button type="submit" class="goto_write">수정</button>
 </form>
+</div>
+<div class="column side" style="background-color:#ffc790;;">
+      <div align="left">
+  </div>
+ <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank">
+<input type=hidden name=where value="nexteach">
+</form>
+</div>
+<div class="footer">
+  <form role="form">
+</form>
+</div>

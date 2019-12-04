@@ -1,16 +1,104 @@
-<h2>Forgot your password?</h2>
-
+<style>
+@font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {box-sizing: border-box;}
+body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
+body {
+  font-family: 'SDMiSaeng';
+  font-size: 22px;
+  /*font-weight: bold;*/
+}
+.orange_window {
+	display: inline-block;
+	width: 100%; height: 30px;
+	border: 2px solid orange;
+	background: white;
+	font-family: 'SDMiSaeng';
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 9;
+}
+.input_text {
+	width: 80%; height: 25px;
+	margin: 0px 0 0 0px;
+	border: 0;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 13px;
+	outline: none;
+	color: gray;
+}
+.sch_smit {
+	width: 90%; height: 30px;
+	margin: 0; border: 0;
+	vertical-align: top;
+	background: orange;
+	color: black;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 1px;
+	cursor: pointer;
+	position: fixed;
+	left: 5%;
+}
+.sch_smit:hover {
+	background: orange;
+	margin-left: auto;
+}
+.centered {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.head2 {
+	font-size: 25px;
+	text-align: center;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+	color: coral;
+}
+.login_position {
+	position: fixed;
+  left: 34%;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+}
+.find_info .bar {
+    margin: 0 4px;
+}
+.bar {
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    text-indent: -999em;
+    background: #E4E4E5;
+}
+</style>
+<div class="centered">
+<div class="head2">
+  <h2>Forgot your password?</h2>
+</div><br />
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+    <div class="orange_window">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input_text" %>
+    </div>
+  </div><br />
+  <button type='submit' class='sch_smit'>Send me reset password instructions</button> <br /><br />
+  <br /><br />
 <% end %>
-
-<%= render "devise/shared/links" %>
+    <div class="login_position">
+      <%- if controller_name != 'sessions' %>
+      <%= link_to "Log in", new_session_path(resource_name) %>
+      <% end %>
+      <span class="bar" aria-hidden="true">|</span>
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Sign up", new_registration_path(resource_name) %>
+		  <% end %>
+    </div>
+</div>

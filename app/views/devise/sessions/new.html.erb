@@ -1,9 +1,18 @@
 <style>
+@font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {box-sizing: border-box;}
+body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
+body {
+  font-family: 'SDMiSaeng';
+  font-size: 22px;
+  font-weight: bold;
+}
 .orange_window {
 	display: inline-block;
 	width: 366px; height: 40px;
 	border: 2px solid orange;
 	background: white;
+	font-family: 'SDMiSaeng';
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
@@ -15,20 +24,23 @@
 	border: 0;
 	line-height: 30px;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 13px;
 	outline: none;
 	color: gray;
 }
 .sch_smit {
-	width: 54px; height: 30px;
+	width: 64px; height: 30px;
 	margin: 0; border: 0;
 	vertical-align: top;
 	background: orange;
-	color: white;
+	color: black;
+	font-family: 'SDMiSaeng';
 	font-weight: bold;
+	font-size: 20px;
 	border-radius: 1px;
 	cursor: pointer;
-	margin: auto;
+	position: fixed;
+	left: 40%;
 }
 .sch_smit:hover {
 	background: orange;
@@ -42,15 +54,15 @@
   transform: translate(-50%, -50%);
 }
 .head {
-	font-family: monospace;
-	font-size: 50px;
+	font-size: 60px;
 	text-align: center;
+	font-family: 'SDMiSaeng';
 	font-weight: bold;
 	color: coral;
 }
 .login_position {
 	position: fixed;
-    left: 20%;
+    left: 25%;
 }
 .find_info .bar {
     margin: 0 4px;
@@ -61,16 +73,17 @@
     height: 13px;
     text-indent: -999em;
     background: #E4E4E5;
+}
 </style>
 <div class="centered">
 	<!--<span class='orange_window'>-->
 	<!--	<input type='text' class='input_text' />-->
 	<!--</span>-->
 	<!--<button type='submit' class='sch_smit'>검색</button>-->
-	<p class="head">오늘은 어디가?</p>
+	<p class="head">오늘은 어디가?<br /></p>
 	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 	  <div class="field">
-	    <%= f.label :email %><br />
+	    <br /><%= f.label :email %><br />
 	  </div>
 	  <div class="orange_window">
 	    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input_text", placeholder: "아이디", value: "" %><br /><br />
@@ -94,7 +107,6 @@
  		 <%= link_to "Sign up", new_registration_path(resource_name) %>
 		<% end %>
 		<span class="bar" aria-hidden="true">|</span>
-		</span>
 		<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
 	 	 <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 		<% end %>

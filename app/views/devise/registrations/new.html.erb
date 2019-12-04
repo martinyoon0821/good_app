@@ -1,34 +1,119 @@
-<h2>Sign up</h2>
-
+<style>
+@font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {box-sizing: border-box;}
+body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
+body {
+  font-family: 'SDMiSaeng';
+  font-size: 22px;
+  /*font-weight: bold;*/
+}
+.orange_window {
+	display: inline-block;
+	width: 100%; height: 30px;
+	border: 2px solid orange;
+	background: white;
+	font-family: 'SDMiSaeng';
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 9;
+}
+.input_text {
+	width: 80%; height: 25px;
+	margin: 0px 0 0 0px;
+	border: 0;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 13px;
+	outline: none;
+	color: gray;
+}
+.sch_smit {
+	width: 25%; height: 30px;
+	margin: 0; border: 0;
+	vertical-align: top;
+	background: orange;
+	color: black;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 1px;
+	cursor: pointer;
+	position: fixed;
+	left: 36%;
+}
+.sch_smit:hover {
+	background: orange;
+	margin-left: auto;
+}
+.centered {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.head2 {
+	font-size: 30px;
+	text-align: center;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+	color: coral;
+}
+.login_position {
+	position: fixed;
+  left: 38%;
+	font-family: 'SDMiSaeng';
+	font-weight: bold;
+}
+.find_info .bar {
+    margin: 0 4px;
+}
+.bar {
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    text-indent: -999em;
+    background: #E4E4E5;
+}
+</style>
+<div class="centered">
+<div class="head2">
+  <h2>Sign up</h2><br />
+</div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="orange_window">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input_text" %>
+    </div>
   </div>
-  
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "이름" %>
+    <div class="orange_window">
+      <%= f.text_field :name, autocomplete: "이름", class: "input_text" %>
+    </div>
   </div>
-
   <div class="field">
     <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <div class="orange_window">
+        <%= f.password_field :password, autocomplete: "new-password", class: "input_text" %>
+      </div>
   </div>
-
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <div class="orange_window">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input_text" %>
+      <br /><br />
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+  <button type='submit' class='sch_smit'>Sign up</button><br /><br />
 <% end %>
-
-<%= render "devise/shared/links" %>
+  <div class="login_position">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
