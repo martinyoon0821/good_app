@@ -4,6 +4,7 @@
 body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
 body {
   font-family: 'SDMiSaeng';
+  font-size:20px;
 }
 a {color:#333; text-decoration:none;}
 a:active, a:hover {text-decoration:none;}
@@ -74,7 +75,9 @@ a:active, a:hover {text-decoration:none;}
   color: white;
 }
 .pagination a:hover:not(.active) {background-color: #ddd;}
-.goto_write {color:#fff; padding:3px 3px; border-radius:3px; float:right; margin-top:-20px;}
+.goto_write {background:#888; color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-20px;}
+.goto_write2 {color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-20px;}
+.goto_write3 {background:#888; color:#fff; padding:3px 10px; border-radius:3px; margin-top:-20px;}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -89,8 +92,9 @@ a:active, a:hover {text-decoration:none;}
   text-align: center;
 }
 .date {
-  position : fixed;
+  position : relative;
   left : 65%;
+  padding: 10px;
 }
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
@@ -123,7 +127,7 @@ a:active, a:hover {text-decoration:none;}
                 	<tbody>
                 	  <tr valign="top">
 	                	<td>
-	                        <span class="b m-tcol-c"><%= @board.title %></span>
+	                        <span class="b m-tcol-c" style="font-size: 25px"><%= @board.title %></span>
 	                        <span class="date"><%= @board.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span></td>
                        </tr>
                         </tbody>
@@ -144,37 +148,43 @@ a:active, a:hover {text-decoration:none;}
     <a href="/boards/map">지도</a>
     <a href="/boards/index">게시판</a>
     -->
-    <%= @board.user.name %> <br><br />
-    <%= @board&.content&.html_safe %> <br>
+    <%= @board.user.name %> (<%= @board.user.email %>) <br><br />
+    <%= @board.content.html_safe %> <br>
     <br>
     <hr>
     좋아요한 사용자 수: <%= @board.users.count %>
     <br>
-    <a href="/boards/likes/<%= @board.id%>">좋아요</a>
+    <br>
+    <a href="/boards/likes/<%= @board.id%>" class="goto_write" >좋아요</a>
     <hr>
     <form action="/boards/<%= @board.id %>/comments" method="POST">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <input type="text" name="body" placeholder=" 댓글작성">
-        <button type="submit">제출</button>
+        <div>
+          <textarea type="text" name="body" placeholder=" 댓글작성" style="width:90%;height:100px;"></textarea>
+          <button type="submit" style="width:60px;float:right;height:30px;">제출</button>
+        </div>
     </form>
     </td>
     </tr>
-							</tbody>
-                        </table>
-                    </div>
-                </div>
+		</tbody>
+    </table>
+    </div>
+    </div>
+<br>
 <hr>
-<h2>댓글 리스트</h2>
+<h3>댓글 리스트</h3>
+<h4><br></h4>
 <% @board.comments.each do |comment| %>
-    작성자 : <%= comment.user.name %>
-    댓글 내용 : <%= comment.body %>
+    <%= comment.user.name %>
+    <br>
+    <%= comment.body %>
     <% if current_user == comment.user %>
         <a href="/comments/destroy/<%= comment.id %>">삭제</a>
     <% end %>
     <hr>
 <% end %>
-<a href="/boards/index">목록으로 가기</a>
-<div class="goto_write">
+<a href="/boards/index" class="goto_write3">목록으로 가기</a>
+<div class="goto_write2">
 <br> <a href="/boards/new" style="background-color: grey; padding: 3px 10px; border-radius: 3px;">글 작성하기</a>
 </div>
 </div>
@@ -192,8 +202,8 @@ a:active, a:hover {text-decoration:none;}
   </div>
  <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank">
 <input type=hidden name=where value="nexteach">
-<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35">
-<input type=image src="/apple.png"  width='80' height='25' border=0 align=absmiddle>
+<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="25" style="border-width:5px; width:53%;height:40px;"/>
+<input type=image src="/apple.png"  width='25' height='25' border=0 align=absmiddle>
 </form>
 </div></div>
 <div class="footer">

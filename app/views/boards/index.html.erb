@@ -2,14 +2,12 @@
 @font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
 * {box-sizing: border-box;}
 body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
- 
 body {
   font-family: 'SDMiSaeng';
+  font-size:20px;
 }
-
 a {color:#333; text-decoration:none;}
 a:active, a:hover {text-decoration:none;}
-
 /* Style the header */
 .header {
   width:100%;
@@ -24,42 +22,35 @@ a:active, a:hover {text-decoration:none;}
   float: left;
   padding: 10px;
   height: 700px; /* Should be removed. Only for demonstration */
-  
 }
-
 /* Left and right column */
 .column.side {
-  width: 20%;
+  width: 20%; text-align:center;
 }
 .column.side input.text {width:90%; height:30px;}
 .column.side input.photo {width:90%; height:80px;}
 .column.side a {background:#008000; padding:5px 0px; width:180px; text-align:center; border-radius: 5px; display:inline-block; font-size:20px; margin:10px 0; color:#fff;}
-
 /* Middle column */
 .column.middle {
   width: 60%;
 }
-
 .column.middle input.text {width:70%; height:25px; margin-top:5px;}
 .column.middle button.submit {background:#666; color:#fff; border:none; border-radius:3px; padding:3px 10px;}
 .column.middle table .th1 {width:10%;}
 .column.middle table .th2 {width:20%;}
-.column.middle table .th3 {width:58%;}
-.column.middle table .th4 {width:12%;}
+.column.middle table .th3 {width:50%;}
+.column.middle table .th4 {width:40%;}
 .column.middle table {margin-top:10px;}
 .column.middle table th {background:#aaa; color:#fff;}
-
 .column.middle table {
   border-collapse: collapse;
   width: 100%;
 }
-
 .column.middle table td, .column.middle table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
-
-.column.middle table tr:nth-child(even){background-color: #f2f2f2;}
+.column.middle table tr:nth-child(even){background-color: #F2F2F2;}
 .column.middle table tr:hover {background-color: #ddd;}
 .column.middle table th {
   padding-top: 12px;
@@ -67,38 +58,30 @@ a:active, a:hover {text-decoration:none;}
   text-align:center;
   background-color: #4CAF50;
   color: white;
-  
 }
-
 .pagination {
   display: inline-block;
   width:100%;
   margin-top:15px;
 }
-
 .pagination span {
   color: black;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
 }
-
 .pagination span.active {
   background-color: #4CAF50;
   color: white;
 }
-
 .pagination a:hover:not(.active) {background-color: #ddd;}
-
 .goto_write {background:#888; color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-10px;}
-
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
-
 /* Style the footer */
 .footer {
   width:100%; height:50px;
@@ -106,19 +89,19 @@ a:active, a:hover {text-decoration:none;}
   padding: 10px;
   text-align: center;
 }
-
-
-
+.button {
+    background: #666;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 10px;
+}
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
   .column.side, .column.middle {
     width: 100%;
   }
-
-    
 </style>
-
-
 <!-- header 시작 -->
 <div class="header">
   <img src="/로고.PNG" width="20%" height="150px" align="left">
@@ -134,13 +117,11 @@ a:active, a:hover {text-decoration:none;}
     </div>
 </div>
 <!-- header 끝 -->
-
 <div class="row">
   <div class="column side" style="background-color:#ffc790;">
   </div>
-
 <div class="column middle" style="background-color:#fff;">
-<!--    
+<!--
 <% if user_signed_in? %>
     <%= current_user.name %>
     <a href="/users/sign_out" data-method="delete">로그아웃</a>
@@ -150,21 +131,13 @@ a:active, a:hover {text-decoration:none;}
 <a href="/boards/map">지도</a>
 <a href="/boards/index">게시판</a>
 -->
-
-
 <h1>글 리스트</h1>
-
-
 <form action="/boards/index" method="GET">
     <input class="text" type="text" name="query" value="<%= params[:query] %>" placeholder="제목, 내용으로 검색">
     <button class="submit" type="submit">검색</button>
-    
 </form>
-
- 
 <table>
   <tbody style="font-size: 18px;"></tbody>
-
     <tr>
         <th class="th1">작성자</th>
         <th class="th2">제목</th>
@@ -175,52 +148,41 @@ a:active, a:hover {text-decoration:none;}
         <tr>
             <td class="th1"><%= board.user.name %></td>
             <td class="th2"><%= board.title %></td>
-            <td class="th3"><%= board&.content&.html_safe %></td>
+            <td class="th3"><%= board.content.html_safe %></td>
             <td class="th4">
-                <a href="/boards/show/<%= board.id %>">보기</a>
+                <a href="/boards/show/<%= board.id %>" class="button">보기</a>
                 <% if current_user == board.user %>
-                    <a href="/boards/edit/<%= board.id %>">수정</a>
-                    <a href="/boards/destroy/<%= board.id %>">삭제</a>
+                    <a href="/boards/edit/<%= board.id %>" class="button">수정</a>
+                    <a href="/boards/destroy/<%= board.id %>" class="button">삭제</a>
                 <% end %>
             </td>
         </tr>
     <% end %>
 </table>
-
-
 <%== pagy_nav(@pagy) %>
-
 <div class="goto_write">
  <a href="/boards/new">글 작성하기</a>
-</div> 
+</div>
 </div>
   <div class="column side" style="background-color:#ffc790;;">
-      <div align="left">                       
-
-      
+      <div>
 <% if user_signed_in? %>
     <%= current_user.email %>님 안녕하세요!!
     <br>
-    <a href="/home/mypage">내가 단 댓글 확인하기 </a> 
+    <a href="/home/mypage">내가 단 댓글 확인하기 </a>
     <br>
-    
     <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
 <% else %>
     <%= link_to "로그인", new_user_session_path %>
 <% end %>
   </div>
- <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank"> 
-<input type=hidden name=where value="nexteach"> 
-<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35"> 
-<input type=image src="/apple.png"  width='80' height='25' border=0 align=absmiddle> 
-</form> 
-  
-                 
+ <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank">
+<input type=hidden name=where value="nexteach">
+<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35" style="border-width:5px; width:53%;height:40px;"/>
+<input type=image src="/apple.png"  width='25' height='25' border=0 align=absmiddle>
+</form>
 </div></div>
-
-
 <div class="footer">
   <form role="form">
-
 </form>
 </div>

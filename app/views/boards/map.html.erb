@@ -130,7 +130,7 @@ a:active, a:hover {text-decoration:none;}
     
     <form action="/boards/map" method="GET">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    오늘의 장소 : <input type="text" name="place" placeholder="ex):홍대카페, 홍대방탈출" value="<%= params[:place] %>" /> <br/>
+    오늘의 장소 : <input type="text" name="place" placeholder="ex):홍대카페, 홍대방탈출" value="<%= params[:place] %>" />
     <button type="submit">검색</button>
 </form>
   </div>
@@ -141,7 +141,7 @@ a:active, a:hover {text-decoration:none;}
       var locations = <%= @markers.to_json.html_safe %>
 
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
+        zoom: 12,
         center: new google.maps.LatLng( 37.55, 126.92),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
@@ -165,12 +165,23 @@ a:active, a:hover {text-decoration:none;}
     }
   </script>
 </div>
-  <div class="column side" style="background-color:#ffc790;;">
-    <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank"> 
-<input type=hidden name=where value="nexteach"> 
-<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35"> 
-<input type=image src="/apple.png"  width='80' height='25' border=0 align=absmiddle> 
-</form> 
+ <div class="column side" style="background-color:#ffc790;;">
+          <div>
+<% if user_signed_in? %>
+    <%= current_user.email %>님 안녕하세요!!
+    <br>
+    <a href="/home/mypage">내가 단 댓글 확인하기 </a>
+    <br>
+    <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
+<% else %>
+    <%= link_to "로그인", new_user_session_path %>
+<% end %>
+  </div>
+    <form name=fsearch method=get style="margin:0px;"  action="http://search.naver.com/search.naver" target="_blank">
+<input type=hidden name=where value="nexteach">
+<input name=query itemname="검색어" required value="" placeholder="네이버 검색으로 연동" size="35" style="border-width:5px; width:53%;height:40px;"/>
+<input type=image src="/apple.png"  width='25' height='25' border=0 align=absmiddle>
+</form>
       </div></div>
 <div class="footer">
   <form role="form">
