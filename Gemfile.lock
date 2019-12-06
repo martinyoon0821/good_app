@@ -103,6 +103,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.8.2)
+      devise (>= 4.6)
     erubi (1.8.0)
     execjs (2.7.0)
     faker (2.1.2)
@@ -299,6 +301,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
   faker
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)

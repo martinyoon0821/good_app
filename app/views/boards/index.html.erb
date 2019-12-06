@@ -202,8 +202,7 @@ a:active, a:hover {text-decoration:none;}
     <br>
     <a href="/home/mypage">내가 단 댓글 확인하기 </a> 
     <br>
-    <a href="/users/index">'좋아요' 누른 게시글 보러가기</a>
-    <br>
+    
     <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
 <% else %>
     <%= link_to "로그인", new_user_session_path %>

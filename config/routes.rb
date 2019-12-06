@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/mypage'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root "boards#index"
@@ -19,5 +20,6 @@ Rails.application.routes.draw do
   get 'boards/map'
   get 'boards/index' => 'boards#index'
   get 'boards/likes/:board_id' => "likes#create"
+  get "home/mypage" => "home#mypage"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
