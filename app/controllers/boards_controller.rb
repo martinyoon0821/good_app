@@ -6,7 +6,7 @@ class BoardsController < ApplicationController
       @boards = Board.where("title || content LIKE ?","%#{params[:query]}%")
     else
     @boards = Board.order("created_at DESC").all
-  end
+    end
   
   @pagy, @boards = pagy(@boards, items: 7)
   end
