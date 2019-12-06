@@ -145,7 +145,7 @@ a:active, a:hover {text-decoration:none;}
     <a href="/boards/index">게시판</a>
     -->
     <%= @board.user.name %> <br><br />
-    <%= @board.content.html_safe %> <br>
+    <%= @board&.content&.html_safe %> <br>
     <br>
     <hr>
     좋아요한 사용자 수: <%= @board.users.count %>

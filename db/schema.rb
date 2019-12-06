@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_060353) do
+ActiveRecord::Schema.define(version: 2019_12_06_173349) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,6 +57,12 @@ ActiveRecord::Schema.define(version: 2019_12_04_060353) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "keywords", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "board_id"
@@ -64,6 +70,16 @@ ActiveRecord::Schema.define(version: 2019_12_04_060353) do
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_likes_on_board_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "title"
+    t.float "lat"
+    t.float "lng"
+    t.integer "keyword_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_locations_on_keyword_id"
   end
 
   create_table "users", force: :cascade do |t|

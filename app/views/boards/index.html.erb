@@ -175,7 +175,7 @@ a:active, a:hover {text-decoration:none;}
         <tr>
             <td class="th1"><%= board.user.name %></td>
             <td class="th2"><%= board.title %></td>
-            <td class="th3"><%= board.content.html_safe %></td>
+            <td class="th3"><%= board&.content&.html_safe %></td>
             <td class="th4">
                 <a href="/boards/show/<%= board.id %>">보기</a>
                 <% if current_user == board.user %>

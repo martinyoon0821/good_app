@@ -41,4 +41,21 @@ class BoardsController < ApplicationController
     
     redirect_to "/boards/index"
   end
+  
+  def map
+    place = params[:place]
+    if place.present?
+      keyword = Keyword.find_by(name: place)
+      
+      unless keyword.present?
+        keyword = Keyword.create(name: place)
+        keyword.get_crawl(place)
+      end
+      
+      @markers = keyword.get_markers
+    end
+  end
+  
+  def marker
+  end
 end

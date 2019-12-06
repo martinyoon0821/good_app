@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   
   get 'boards/map'
+  post 'boards/marker'
   get 'boards/index' => 'boards#index'
   get 'boards/likes/:board_id' => "likes#create"
   get "home/mypage" => "home#mypage"
