@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'boards/:board_id/comments' => "comments#create"
   get 'comments/destroy/:id' => "comments#destroy"
   
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   
   get 'boards/map'
   get 'boards/index' => 'boards#index'

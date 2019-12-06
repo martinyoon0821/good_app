@@ -1,6 +1,173 @@
-<h2> 내가 작성한 댓글</h2>
-<% current_user.comments.each do |comment| %>
-    <%= comment.body %>
-    <a href="/boards/<%= comment.board.id%>">원글 보러가기</a>
-    <hr>
-    <%end%>
+<style>
+@font-face { font-family: 'SDMiSaeng'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {box-sizing: border-box;}
+body, div, ul, li, h1, h2,h3,h4,h5,h6, p, th, td, input ,select, button {margin:0; padding:0;}
+body {
+  font-family: 'SDMiSaeng';
+}
+a {color:#333; text-decoration:none;}
+a:active, a:hover {text-decoration:none;}
+/* Style the header */
+.header {
+  width:100%;
+  height:150px;
+  background:#fd7f4f;
+}
+.header .btn_Area {position:absolute; text-align:center; width:100%; top:100px;}
+.header .button {background:#008000; padding:5px 20px; border-radius: 5px; display:inline-block; font-size:20px; color:#fff;}
+.header .button a {color:#fff;}
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 700px; /* Should be removed. Only for demonstration */
+}
+/* Left and right column */
+.column.side {
+  width: 20%; text-align:center;
+}
+.column.side input.text {width:90%; height:30px;}
+.column.side input.photo {width:90%; height:80px;}
+.column.side a {background:#008000; padding:5px 0px; width:180px; text-align:center; border-radius: 5px; display:inline-block; font-size:20px; margin:10px 0; color:#fff;}
+/* Middle column */
+.column.middle {
+  width: 60%;
+}
+.column.middle input.text {width:70%; height:25px; margin-top:5px;}
+.column.middle button.submit {background:#666; color:#fff; border:none; border-radius:3px; padding:3px 10px;}
+.column.middle table .th1 {width:10%;}
+.column.middle table .th2 {width:30%;}
+.column.middle table .th3 {width:50%;}
+.column.middle table .th4 {width:10%;}
+.column.middle table {margin-top:10px;}
+.column.middle table th {background:#aaa; color:#fff;}
+.column.middle table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.column.middle table td, .column.middle table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.column.middle table tr:nth-child(even){background-color: #F2F2F2;}
+.column.middle table tr:hover {background-color: #ddd;}
+.column.middle table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align:center;
+  background-color: #4CAF50;
+  color: white;
+}
+.pagination {
+  display: inline-block;
+  width:100%;
+  margin-top:15px;
+}
+.pagination span {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.pagination span.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+.goto_write {background:#888; color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-20px;}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Style the footer */
+.footer {
+  width:100%; height:50px;
+  background-color: #FD7F4F;
+  padding: 10px;
+  text-align: center;
+}
+.middle_header {
+    padding: 10px;
+}
+.box {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    /*border-radius: 5px;*/
+    padding: 1.25em;
+    /*background-color: lavender;*/
+    flex: 1 1 auto;
+    margin: 15px 0 20px 20px;
+    border: 1px solid gray;
+}
+.box_text {
+    position: relative;
+    bottom: 1%;
+    right: 3%;
+}
+.container {
+    padding: 20px;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+</style>
+<!-- header 시작 -->
+<div class="header">
+  <img src="/로고.PNG" width="20%" height="150px" align="left">
+    <img src="/캡처(멋사).PNG" width="60%" height="150px">
+  <!-- <h2>Header</h2> -->
+ <div class="btn_Area">
+     <div class="button">
+       <a href="/boards/map">지도</a>
+     </div>
+     <div class="button">
+      <a href="/boards/index">게시판</a>
+     </div>
+ </div>
+</div>
+<!-- header 끝 -->
+<div class="row">
+  <div class="column side" style="background-color:#ffc790;">
+  </div>
+    <div class="column middle" style="background-color:#fff;">
+        <div class="middle_header">
+            <h2> 내가 작성한 댓글</h2>
+        </div>
+        <div class="container">
+            <div class="mother">
+            <div class="row">
+            <% current_user.comments.each do |comment| %>
+            <!--<div class="box">-->
+            <div class="box col-lg-4 col-xm-12 col-ms-6 mypage-box">
+                <%= comment.body %>
+                <br>
+                <br>
+                <hr>
+                <a href="/boards/show/<%= comment.board.id%>">원글 보러가기</a>
+            </div>
+            <%end%>
+            </div>
+            </div>
+        </div>
+    </div>
+  <div class="column side" style="background-color:#ffc790;;">
+      <div>
+        <% if user_signed_in? %>
+        <%= current_user.email %>님 안녕하세요!!
+        <br>
+        <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
+        <% else %>
+        <%= link_to "로그인", new_user_session_path %>
+        <% end %>
+      </div>
+  </div>
+</div>
+    <div class="footer">
+      <form role="form">
+        </form>
+    </div>

@@ -74,7 +74,7 @@ a:active, a:hover {text-decoration:none;}
   color: white;
 }
 .pagination a:hover:not(.active) {background-color: #ddd;}
-.goto_write {background:#888; color:#fff; padding:3px 10px; border-radius:3px; float:right; margin-top:-20px;}
+.goto_write {color:#fff; padding:3px 3px; border-radius:3px; float:right; margin-top:-20px;}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -87,6 +87,10 @@ a:active, a:hover {text-decoration:none;}
   background-color: #FD7F4F;
   padding: 10px;
   text-align: center;
+}
+.date {
+  position : fixed;
+  left : 65%;
 }
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
@@ -113,29 +117,52 @@ a:active, a:hover {text-decoration:none;}
   <div class="column side" style="background-color:#ffc790;">
   </div>
 <div class="column middle" style="background-color:#fff;">
-<!--
-<% if user_signed_in? %>
-    <%= current_user.name %>
-    <a href="/users/sign_out" data-method="delete">로그아웃</a>
-<% else %>
-    <a href="/users/sign_in">로그인</a>
-<% end %>
-<a href="/boards/map">지도</a>
-<a href="/boards/index">게시판</a>
--->
-작성자 : <%= @board.user.name %> <br>
-제목 : <%= @board.title %> <br>
-내용 : <%= @board.content.html_safe %> <br>
-<br>
-좋아요한 사용자 수: <%= @board.users.count %>
-<br>
-<a href="/boards/likes/<%= @board.id%>">좋아요</a>
-<hr>
-<form action="/boards/<%= @board.id %>/comments" method="POST">
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <input type="text" name="body" placeholder=" 댓글작성">
-    <button type="submit">제출</button>
-</form>
+  <div class="tit-box">
+			<div class="fl">
+            	<table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                	<tbody>
+                	  <tr valign="top">
+	                	<td>
+	                        <span class="b m-tcol-c"><%= @board.title %></span>
+	                        <span class="date"><%= @board.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span></td>
+                       </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <div class="fr">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+							<tr>
+							  <td>
+							<!--
+    <% if user_signed_in? %>
+        <%= current_user.name %>
+        <a href="/users/sign_out" data-method="delete">로그아웃</a>
+    <% else %>
+        <a href="/users/sign_in">로그인</a>
+    <% end %>
+    <a href="/boards/map">지도</a>
+    <a href="/boards/index">게시판</a>
+    -->
+    <%= @board.user.name %> <br><br />
+    <%= @board.content.html_safe %> <br>
+    <br>
+    <hr>
+    좋아요한 사용자 수: <%= @board.users.count %>
+    <br>
+    <a href="/boards/likes/<%= @board.id%>">좋아요</a>
+    <hr>
+    <form action="/boards/<%= @board.id %>/comments" method="POST">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="text" name="body" placeholder=" 댓글작성">
+        <button type="submit">제출</button>
+    </form>
+    </td>
+    </tr>
+							</tbody>
+                        </table>
+                    </div>
+                </div>
 <hr>
 <h2>댓글 리스트</h2>
 <% @board.comments.each do |comment| %>
@@ -148,7 +175,7 @@ a:active, a:hover {text-decoration:none;}
 <% end %>
 <a href="/boards/index">목록으로 가기</a>
 <div class="goto_write">
-<br> <a href="/boards/new">글 작성하기</a>
+<br> <a href="/boards/new" style="background-color: grey; padding: 3px 10px; border-radius: 3px;">글 작성하기</a>
 </div>
 </div>
   <div class="column side" style="background-color:#ffc790;;">
@@ -158,7 +185,6 @@ a:active, a:hover {text-decoration:none;}
     <br>
     <a href="/home/mypage">내가 단 댓글 확인하기 </a>
     <br>
-   
     <%= link_to "로그아웃", destroy_user_session_path, method: :delete %>
 <% else %>
     <%= link_to "로그인", new_user_session_path %>
